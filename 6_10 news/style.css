@@ -49,8 +49,12 @@ footer .links > a {
 }
 
 .news {
+	margin: 5px auto 0;
+	width: 900px;
 	background-color: #fff;
 	padding: 50px 0 32px;
+	border-left: 1.5px ridge #E4E5E8;
+	border-right: 1.5px ridge #E4E5E8;
 }
 
 article {
@@ -58,7 +62,7 @@ article {
 	margin: 0 auto 32px;
 	padding: 6px 15px;
 	border-bottom: 1px solid rgb(128, 128, 128);
-	border-radius: 5px; 
+	
 }
 
 article a {
