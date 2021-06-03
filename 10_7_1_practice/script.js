@@ -161,7 +161,7 @@ document.getElementById('btn_calc').addEventListener('click', function () {
     pointNum = false;
 })
 
-let currentHistory = '';
+let currentHistory = 'История: <br>';
 document.getElementById('btn_calc').addEventListener('click', function() {
     let historyVar = document.getElementById('history');
     historyVar.innerHTML = currentHistory;
@@ -171,11 +171,11 @@ function addToHistory(firstOp, lastOp, operation, result) {
     let operator;
 
     if (operation === 'sqrt') {
-        currentHistory += `История:<br> &#8730 ${firstOp} = ${result} <br>`;
+        currentHistory += `&#8730 ${firstOp} = ${result} <br>`;
     }
     else {
         if(operation === 'pow') {
-            currentHistory += `История:<br> ${firstOp}<sup>2</sup> = ${result} <br>`;
+            currentHistory += `${firstOp}<sup>2</sup> = ${result} <br>`;
         }
         else {
             switch (operation) {
@@ -188,7 +188,7 @@ function addToHistory(firstOp, lastOp, operation, result) {
                 case 'division': operator = ' / ';
                 break;
             }
-            currentHistory += `История:<br> ${firstOp}${operator}${lastOp} = ${result} <br>`;
+            currentHistory += `${firstOp}${operator}${lastOp} = ${result} <br>`;
         }
     }
 }
