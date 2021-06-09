@@ -1,4 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 .game-card {
     height: 100vh;
     font-family: 'Open Sans', monospace;
+}
+
+#answerField {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+}
+.m-0 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+}
+#btnRetry {
+    /* font-family: 'Roboto', sans-serif; */
+    font-size: 1.2rem;
+    border: 1px groove #17a2b8 ;
+
 }

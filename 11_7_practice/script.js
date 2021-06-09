@@ -1,9 +1,11 @@
-let minValue
-let maxValue
+let minValue;
+let maxValue;
+
 let orderNumber = 1;
+
 let gameRun = true;
 
-gameStart();
+let answerNumber;
 
 //функция начала игры
 function gameStart () {
@@ -33,8 +35,16 @@ function gameStart () {
 
     // вывод предположения (answerField)
     orderNumberField.innerText = orderNumber;
-    answerField.innerText = `Вы загадали число ${transformationToText().length > 20 ? answerNumber : transformationToText()}?`;
+    answerField.innerText = `Вы загадали число ${transformationToText()}?`;
+    
+console.log(`AnswerNumber =  ${answerNumber}`);
+console.log(`MinValue = ${minValue}`);
+console.log(`MaxValue = ${maxValue}`);
+console.log('');
+///
 }
+
+gameStart();
 
 // кнопка "заново"
 document.getElementById('btnRetry').addEventListener('click', function () {
@@ -50,16 +60,17 @@ document.getElementById('btnRetry').addEventListener('click', function () {
 //функция генерации фразы в answerField
 function generateAnswerField() {
     const phraseRandom = Math.round( Math.random()*3);
-
+    const answerText = transformationToText(answerNumber);
     switch (phraseRandom) {
-        case 1 : answerField.innerText = `Может это число ${transformationToText().length > 20 ? answerNumber : transformationToText()}?`;
+        case 1 : answerField.innerText = `Может это число ${answerText}?`;
         break;
-        case 2 : answerField.innerText = `Думаю это число ${transformationToText().length > 20 ? answerNumber : transformationToText()}?`;
+        case 2 : answerField.innerText = `Думаю это число ${answerText}`;
         break;
-        case 3 : answerField.innerText = `Легко! Это число ${transformationToText().length > 20 ? answerNumber : transformationToText()}?`;
+        case 3 : answerField.innerText = `Легко! Это число ${answerText}?`;
+        break;
+        default: answerField.innerText = `Скорее всего это число ${answerText}`;
         break;
     }
-    console.log(transformationToText().length);
 }
 
 //трансформация в текст
@@ -80,20 +91,23 @@ function transformationToText () {
     // обработка чисел 10-19
     if(answerNumber > 9 && answerNumber <20) {
         textAnswerNumber = elevenToNineteen[answerNumber%10 - 1];
-        console.log(answerNumber);
     }
     //остальные числа
-    else {
+    else { 
+        if(answerNumber === 0) {textAnswerNumber = 0}
         thirdRank = thirdRankValues[(answerNumber-answerNumber%100)/100-1];
         secondRank = secondRankValues[(answerNumber%100-answerNumber%10)/10-2];
         firstRank = oneToTen[answerNumber%10-1];
         
-        // console.log('answerNumber = ' + answerNumber);
-        // console.log(`${thirdRank === undefined ? '' : thirdRank} | ${secondRank === undefined ? '' : secondRank} | ${firstRank === undefined ? '' : firstRank}`);
-
         textAnswerNumber = `${thirdRank === undefined ? '' : thirdRank} ${secondRank === undefined ? '' : secondRank} ${firstRank === undefined ? '' : firstRank}`;
     }
-    return textAnswerNumber;
+    // console.log(`textAnswerNumber = ${textAnswerNumber}`);
+        if(answerNumber ===0) { 
+            return 0;
+        }
+        else {
+            return textAnswerNumber.length < 20 ? textAnswerNumber : answerNumber;
+        }
 }
 
 //кнопка больше
@@ -108,11 +122,16 @@ document.getElementById('btnOver').addEventListener('click', function () {
             answerField.innerText = answerPhrase;
             gameRun = false;
         } else {
-            minValue = answerNumber  + 1;
+            minValue = answerNumber + 1;
             answerNumber  = Math.floor((minValue + maxValue) / 2);
             orderNumber++;
             orderNumberField.innerText = orderNumber;   
             generateAnswerField();
+console.log(`AnswerNumber = ${answerNumber}`);
+console.log(`MinValue = ${minValue}`);
+console.log(`MaxValue = ${maxValue}`);
+console.log('');
+///
         }
     }
 })
@@ -130,10 +149,15 @@ document.getElementById('btnLess').addEventListener('click', function () {
             gameRun = false;
         } else {
             maxValue = answerNumber - 1;
-            answerNumber  = Math.floor((minValue + maxValue) / 2);
+            answerNumber  = Math.ceil((minValue + maxValue) / 2);
             orderNumber++;
             orderNumberField.innerText = orderNumber;
             generateAnswerField();
+console.log(`AnswerNumber = ${answerNumber}`);
+console.log(`MinValue = ${minValue}`);
+console.log(`MaxValue = ${maxValue}`);
+console.log('');
+///
         }
     }
 })
@@ -147,6 +171,8 @@ document.getElementById('btnEqual').addEventListener('click', function () {
             case 2 : answerField.innerText = `Есть что посложнее?\n\u{1F60E}`;
             break;
             case 3 : answerField.innerText = `Давай еще разок\n\u{1F60E}`;
+            break;
+            default: answerField.innerText = `Всегда срабатывает\n\u{1F60E}`;
             break;
         }
         gameRun = false;
