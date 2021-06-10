@@ -7,6 +7,17 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="style.css" type="text/css"/>
+    
+    <!-- Bootstrap CSS (Cloudflare CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==" crossorigin="anonymous">
+    <!-- jQuery (Cloudflare CDN) -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous">
+    </script>
+    <!-- Bootstrap Bundle JS (Cloudflare CDN) -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js" integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg==" crossorigin="anonymous">
+    </script>
+    <!-- <script>$('#setNewNum').modal("toggle"); -->
+    </script>
 </head>
 <body>
 <div class="container">
@@ -14,12 +25,12 @@
         <div class="col col-md-4 offset-md-4">
             <div class="card text-center">
                 <div class="card-header">
-                    <p class="m-0">Вопрос №<span id="orderNumberField">5</span></p>
+                    <p class="m-0">Вопрос №<span id="orderNumberField">1</span></p>
                 </div>
                 <div class="card-body">
                     <div class="row no-gutters">
                         <div class="col">
-                            <h3 class="card-title m-0"><span id="answerField">Вы загадали число 5?</span></h3>
+                            <h3 class="card-title m-0"><span id="answerField">Загадайте Число</span></h3>
                         </div>
                     </div>
                 </div>
@@ -31,12 +42,53 @@
                     </div>
                 </div>
                 <div class="card-footer">
+                    <!-- Modal -->
+                    <div class="modal fade" id="setNewNum" tabindex="-1" role="dialog" aria-labelledby="setNewNumTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Укажите нижний и верхний порог игры</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" id="minValue" value="0">
+                                    <input type="text" id="maxValue" value="100">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                    <button type="button" class="btn btn-primary" id="saveNums" data-dismiss="modal">Сохранить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <button class="btn btn-light" id="btnRetry">Заново</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- Modal 2 -->
+<div class="modal fade" id="modalTwo" tabindex="-1" role="dialog" aria-labelledby="modalTwoTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="modalTwoTitle"></h5> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span id="modalTwoSpan"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="startTheGame">Готово</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>

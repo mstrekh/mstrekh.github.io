@@ -1,17 +1,23 @@
+//вывести модальное окно
+document.addEventListener ('DOMContentLoaded', () => {
+    $('#setNewNum').modal("show");
+});
+//рабочие переменные
 let minValue;
 let maxValue;
-
+let gameRun;
 let orderNumber = 1;
-
-let gameRun = true;
-
 let answerNumber;
+const inputMinValue = document.getElementById('minValue');
+const inputMaxValue = document.getElementById('maxValue');
 
 //функция начала игры
 function gameStart () {
-    minValue = parseInt(prompt('Минимальное знание числа для игры','0'));
-    maxValue = parseInt(prompt('Максимальное знание числа для игры','100'));
-    
+    gameRun = true;
+
+    minValue = parseInt(inputMinValue.value);
+    maxValue = parseInt(inputMaxValue.value);
+
     // проверка на NaN
     if(isNaN(minValue) || isNaN(maxValue)) {
         minValue = 0;
@@ -22,13 +28,12 @@ function gameStart () {
         //проверка границ min и max value
         (minValue < -999) ? minValue = -999 : minValue;
         (maxValue > 999) ? maxValue = 999 : maxValue;
-
-        alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
+        
+        // alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
     }
     
     answerNumber  = Math.floor((minValue + maxValue) / 2);
     orderNumber = 1;
-    gameRun = true;
 
     const orderNumberField = document.getElementById('orderNumberField');
     const answerField = document.getElementById('answerField');
@@ -36,15 +41,17 @@ function gameStart () {
     // вывод предположения (answerField)
     orderNumberField.innerText = orderNumber;
     answerField.innerText = `Вы загадали число ${transformationToText()}?`;
-    
-console.log(`AnswerNumber =  ${answerNumber}`);
-console.log(`MinValue = ${minValue}`);
-console.log(`MaxValue = ${maxValue}`);
-console.log('');
-///
 }
+//2-е модальное окно
+document.getElementById('saveNums').addEventListener('click', () => {
+    $('#modalTwo').modal("show");
+    document.getElementById('modalTwoSpan').innerText = `Загадайте любое целое число от ${inputMinValue.value} до ${inputMaxValue.value}, а я его угадаю`;
+})
 
-gameStart();
+//запуск программы из 1-го модального окна
+document.getElementById('startTheGame').addEventListener('click', () => {
+    gameStart();
+})
 
 // кнопка "заново"
 document.getElementById('btnRetry').addEventListener('click', function () {
@@ -53,8 +60,9 @@ document.getElementById('btnRetry').addEventListener('click', function () {
     maxValue = 100;
     orderNumber = 0;
 
-    setTimeout(gameStart, 500);
-    // gameStart();
+    inputMinValue.value = 0;
+    inputMaxValue.value = 100;
+    $('#setNewNum').modal("show");
 })
 
 //функция генерации фразы в answerField
@@ -101,13 +109,12 @@ function transformationToText () {
         
         textAnswerNumber = `${thirdRank === undefined ? '' : thirdRank} ${secondRank === undefined ? '' : secondRank} ${firstRank === undefined ? '' : firstRank}`;
     }
-    // console.log(`textAnswerNumber = ${textAnswerNumber}`);
-        if(answerNumber ===0) { 
-            return 0;
-        }
-        else {
-            return textAnswerNumber.length < 20 ? textAnswerNumber : answerNumber;
-        }
+    if(answerNumber ===0) { 
+        return 0;
+    }
+    else {
+        return textAnswerNumber.length < 20 ? textAnswerNumber : answerNumber;
+    }
 }
 
 //кнопка больше
@@ -127,11 +134,6 @@ document.getElementById('btnOver').addEventListener('click', function () {
             orderNumber++;
             orderNumberField.innerText = orderNumber;   
             generateAnswerField();
-console.log(`AnswerNumber = ${answerNumber}`);
-console.log(`MinValue = ${minValue}`);
-console.log(`MaxValue = ${maxValue}`);
-console.log('');
-///
         }
     }
 })
@@ -153,15 +155,11 @@ document.getElementById('btnLess').addEventListener('click', function () {
             orderNumber++;
             orderNumberField.innerText = orderNumber;
             generateAnswerField();
-console.log(`AnswerNumber = ${answerNumber}`);
-console.log(`MinValue = ${minValue}`);
-console.log(`MaxValue = ${maxValue}`);
-console.log('');
-///
         }
     }
 })
 
+//кнопка "верно"
 document.getElementById('btnEqual').addEventListener('click', function () {
     if (gameRun){
         const phraseRandom = Math.round( Math.random()*3);
