@@ -22,14 +22,17 @@ function gameStart () {
     if(isNaN(minValue) || isNaN(maxValue)) {
         minValue = 0;
         maxValue = 100;
-        alert(`Вы ввели некорректные значения. \r\nЗагадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
+        
+        document.getElementById('modalTwoSpan').innerText = `Вы ввели некорректные значения. \r\nЗагадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`;
+        $('#modalTwo').modal("show");
     }
     else{
         //проверка границ min и max value
         (minValue < -999) ? minValue = -999 : minValue;
         (maxValue > 999) ? maxValue = 999 : maxValue;
         
-        // alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
+        document.getElementById('modalTwoSpan').innerText = `Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`;
+        $('#modalTwo').modal("show");
     }
     
     answerNumber  = Math.floor((minValue + maxValue) / 2);
@@ -44,13 +47,12 @@ function gameStart () {
 }
 //2-е модальное окно
 document.getElementById('saveNums').addEventListener('click', () => {
-    $('#modalTwo').modal("show");
-    document.getElementById('modalTwoSpan').innerText = `Загадайте любое целое число от ${inputMinValue.value} до ${inputMaxValue.value}, а я его угадаю`;
+    gameStart();
 })
 
 //запуск программы из 1-го модального окна
 document.getElementById('startTheGame').addEventListener('click', () => {
-    gameStart();
+    // gameStart();
 })
 
 // кнопка "заново"
