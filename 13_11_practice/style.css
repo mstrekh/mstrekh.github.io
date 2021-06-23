@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+.game-card {
+    height: 100vh;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#generator {
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+#control-buttons > div:first-child{
+    padding-left: 50px;
+}
+#control-buttons > div:last-child{
+    padding-right: 50px;
+}
+
+#generator > hr {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
