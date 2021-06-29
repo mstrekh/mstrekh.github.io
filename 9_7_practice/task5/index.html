@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>JS-Start. 5 задача</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        body {
+            height: 97vh;
+            font-family: 'Roboto', sans-serif;
+            color:rgb(6, 2, 37);
+            margin-top: 20%;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        a:hover {
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.2); 
+            color:rgb(0, 168, 31);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+<form action="#">
+    <label>
+        <input type="text" placeholder="Введите текст" id="input_text">
+    </label>
+    <br>
+    <button type="submit" class = "btn btn-success" id = 'btn_output'> 
+        Вывести текст в консоль и удалить из формы
+    </button>
+    <hr>
+    <p>Введенный текст:</p>
+    <p id="duplicateField"></p>
+</form>
+<script src="script.js"></script>
+</body>
+</html>
